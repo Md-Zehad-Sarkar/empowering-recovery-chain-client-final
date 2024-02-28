@@ -41,6 +41,22 @@ const Navbar = () => {
             </NavLink>
           </motion.li>
           <motion.li whileTap={{ scale: 0.9 }}>
+            <NavLink
+              to="/leaderboard"
+              className="px-2 py-1 rounded-md hover:bg-slate-200"
+            >
+              Leaderboard
+            </NavLink>
+          </motion.li>
+          <motion.li whileTap={{ scale: 0.9 }}>
+            <NavLink
+              to="/community"
+              className="px-2 py-1 rounded-md hover:bg-slate-200"
+            >
+              Community
+            </NavLink>
+          </motion.li>
+          <motion.li whileTap={{ scale: 0.9 }}>
             <button
               onClick={() => dispatch(logoutUser())}
               className="px-2 py-1 rounded-md hover:bg-slate-200"
@@ -94,7 +110,7 @@ const Navbar = () => {
           {navmenu}
           <div>
             <button onClick={handleChangeTheme}>
-              {themeMode ? <Moon /> : <Sun />}
+              {themeMode ? <Sun /> : <Moon />}
             </button>
           </div>
         </ul>

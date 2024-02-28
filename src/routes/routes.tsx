@@ -4,12 +4,14 @@ import Supplies from "@/components/home/Supplies";
 import DashboardLayout from "@/components/layouts/DashboardLayout";
 import Errors from "@/components/layouts/Errors";
 import ProtectedPage from "@/components/layouts/ProtectedPage";
+import GratitudeWall from "@/pages/GratitudeWall";
 import Home from "@/pages/Home";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
 import AddSupply from "@/pages/admin/AddSupply";
 import AllSupplies from "@/pages/admin/AllSupplies";
 import Dashboard from "@/pages/admin/Dashboard";
+import DonorLeaderboard from "@/pages/DonorLeaderboard";
 import { createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
       {
         path: "/:id",
         element: <CardDetails />,
+      },
+      {
+        path: "/community",
+        element: <GratitudeWall />,
+      },
+      {
+        path: "/leaderboard",
+        element: <DonorLeaderboard />,
       },
       {
         path: "/register",

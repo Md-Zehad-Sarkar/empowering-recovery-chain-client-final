@@ -32,6 +32,10 @@ const baseQueryRefreshToken: BaseQueryFn<
 > = async (args, api, extraOptions): Promise<any> => {
   let result = await baseQuery(args, api, extraOptions);
 
+  // if (result?.error?.status === 404) {
+  //   return "supplies not found";
+  // }
+
   if (result?.error?.status === 401) {
     const res = await fetch(
       "http://localhost:5000/api/v1/login",
@@ -58,5 +62,5 @@ export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: baseQueryRefreshToken,
   endpoints: () => ({}),
-  tagTypes: ["supplies", "reviews", "users"],
+  tagTypes: ["supplies", "reviews", "users", "donations", "gratitudes"],
 });

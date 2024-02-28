@@ -18,6 +18,10 @@ const AllSupplies = () => {
 
   const [deleteSupply] = useDeleteSupplyMutation();
 
+  // if (data?.data?.length <= 0) {
+  //   return <p>Supplies data not found</p>;
+  // }
+
   const handleDelete = (id: string) => {
     Swal.fire({
       title: "Are you sure?",
@@ -47,13 +51,19 @@ const AllSupplies = () => {
           <TableHead className="w-[100px] font-medium text-xl">Title</TableHead>
           <TableHead className="text-xl font-medium">Category</TableHead>
           <TableHead className="text-xl font-medium">Amount</TableHead>
-          <TableHead className="text-xl font-medium text-right">Edit-Supply</TableHead>
-          <TableHead className="text-xl font-medium text-right">Add-Supply</TableHead>
-          <TableHead className="text-xl font-medium text-right">Delete</TableHead>
+          <TableHead className="text-xl font-medium text-right">
+            Edit-Supply
+          </TableHead>
+          <TableHead className="text-xl font-medium text-right">
+            Add-Supply
+          </TableHead>
+          <TableHead className="text-xl font-medium text-right">
+            Delete
+          </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {data?.data?.map((supplies:TSuppliesData) => (
+        {data?.data?.map((supplies: TSuppliesData) => (
           <SupplyDataTable
             supplies={supplies}
             key={supplies._id}
