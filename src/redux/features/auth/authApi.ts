@@ -29,6 +29,17 @@ const authApi = baseApi.injectEndpoints({
           body: data,
         };
       },
+      invalidatesTags: ["volunteers"],
+    }),
+
+    getAllVolunteers: builder.query({
+      query: () => {
+        return {
+          url: "/api/v1/volunteers",
+          method: "GET",
+        };
+      },
+      providesTags: ["volunteers"],
     }),
   }),
 });
@@ -37,4 +48,5 @@ export const {
   useCreateUserMutation,
   useLoginUserMutation,
   useCreateVolunteerMutation,
+  useGetAllVolunteersQuery,
 } = authApi;

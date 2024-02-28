@@ -15,6 +15,7 @@ import DonorLeaderboard from "@/pages/DonorLeaderboard";
 import { createBrowserRouter } from "react-router-dom";
 import CreateTestimonial from "@/pages/admin/CreateTestimonial";
 import Volunteer from "@/pages/Volunteer";
+import AboutUs from "@/pages/AboutUs";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: "/volunteer",
         element: <Volunteer />,
+      },
+      {
+        path: "/about-us",
+        element: <AboutUs />,
       },
       {
         path: "/register",
