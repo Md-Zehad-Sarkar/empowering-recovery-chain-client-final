@@ -13,6 +13,8 @@ import AllSupplies from "@/pages/admin/AllSupplies";
 import Dashboard from "@/pages/admin/Dashboard";
 import DonorLeaderboard from "@/pages/DonorLeaderboard";
 import { createBrowserRouter } from "react-router-dom";
+import CreateTestimonial from "@/pages/admin/CreateTestimonial";
+import Volunteer from "@/pages/Volunteer";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "/leaderboard",
         element: <DonorLeaderboard />,
+      },
+      {
+        path: "/volunteer",
+        element: <Volunteer />,
       },
       {
         path: "/register",
@@ -75,6 +81,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedPage>
             <AddSupply />
+          </ProtectedPage>
+        ),
+      },
+      {
+        path: "/dashboard/create-testimonial",
+        element: (
+          <ProtectedPage>
+            <CreateTestimonial />
           </ProtectedPage>
         ),
       },

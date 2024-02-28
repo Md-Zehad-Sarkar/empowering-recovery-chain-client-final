@@ -5,7 +5,7 @@ import { Label } from "../ui/label";
 
 interface IInputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  register: any; 
+  register: any;
   name?: string;
   placeholder?: string;
   defaultValues?: any;

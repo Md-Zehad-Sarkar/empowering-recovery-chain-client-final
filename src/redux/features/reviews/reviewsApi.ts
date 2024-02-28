@@ -6,7 +6,17 @@ const reviewsApi = baseApi.injectEndpoints({
       query: () => ({ url: "/api/v1/reviews", method: "GET" }),
       providesTags: ["reviews"],
     }),
+
+    createReviews: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/api/v1/create-reviews",
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
   }),
 });
-export const { useGetReviewsQuery } = reviewsApi;
+export const { useGetReviewsQuery, useCreateReviewsMutation } = reviewsApi;
 export default reviewsApi.reducer;

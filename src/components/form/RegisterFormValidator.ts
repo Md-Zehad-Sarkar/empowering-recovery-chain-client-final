@@ -9,6 +9,7 @@ export const userRegistrationSchema = z.object({
     .string()
     .min(6, { message: "password can't less then 6 character" })
     .max(12, { message: "password can't more then 12 character" }),
+  image: z.string().optional(),
 });
 
 export type UserValidationSchema = z.infer<typeof userRegistrationSchema>;

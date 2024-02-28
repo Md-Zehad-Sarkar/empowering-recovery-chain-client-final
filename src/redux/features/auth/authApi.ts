@@ -20,7 +20,21 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
+
+    createVolunteer: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/api/v1/create-volunteer",
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
   }),
 });
 
-export const { useCreateUserMutation, useLoginUserMutation } = authApi;
+export const {
+  useCreateUserMutation,
+  useLoginUserMutation,
+  useCreateVolunteerMutation,
+} = authApi;

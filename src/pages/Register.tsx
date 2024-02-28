@@ -6,8 +6,12 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { useCreateUserMutation } from "@/redux/features/auth/authApi";
-import { FieldValues, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+
+const image_hosting_api = import.meta.env.VITE_IMAGE_HOSTING_API;
+const api_url = "https://api.imgbb.com/1/upload";
 
 const Register = () => {
   const {
@@ -22,12 +26,25 @@ const Register = () => {
 
   const [createUser] = useCreateUserMutation();
 
-  const onSubmit = (data: FieldValues) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    //image hosting
+    const formData = new FormData();
+    formData.append("image", data.image[0]);
+    // image hosting and get url
+    const response = await axios.post(api_url, formData, {
+      params: { key: image_hosting_api },
+    });
+
+    // extract image url from response
+    const imageUrl = response.data?.data?.display_url;
+
     const createUserInfo = {
       name: data.userName,
       email: data.email,
       password: data.password,
+      image: imageUrl,
     };
+
     createUser(createUserInfo);
     navigate("/login");
   };
@@ -58,6 +75,14 @@ const Register = () => {
           {errors.email.message}
         </span>
       )}
+
+      <InputField
+        type="file"
+        label="Image"
+        name="image"
+        register={register("image")}
+      />
+
       <InputField
         type="password"
         label="Password"
