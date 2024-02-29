@@ -14,7 +14,7 @@ const SuppliesCard = ({ ...supplies }) => {
     <motion.div
       className="mt-10 "
       whileHover={{
-        scale: 1.05,
+        scale: 1.02,
         transition: { duration: 0.6, ease: "easeInOut" },
       }}
       whileTap={{
@@ -22,7 +22,7 @@ const SuppliesCard = ({ ...supplies }) => {
         transition: { duration: 0.6, ease: "easeInOut" },
       }}
     >
-      <Card className="relative h-full mx-auto bg-violet-100 max-w-96">
+      <Card className="relative h-full mx-auto bg-purple-100 shadow-lg max-w-96">
         <img
           src={supplies.image}
           alt=""
@@ -33,15 +33,15 @@ const SuppliesCard = ({ ...supplies }) => {
             <h2>Title: {supplies.title}</h2>
           </CardTitle>
           <CardDescription>
-            <p className="mt-4">Category: {supplies.category}</p>
+            <p className="mt-4 text-black">Category: {supplies.category}</p>
           </CardDescription>
         </CardHeader>
         <CardContent className="mb-8">
-          <p>Amount: {supplies.amount}</p>
+          <p>Amount: ${supplies.amount}</p>
         </CardContent>
         <Link to={`/${supplies._id}`} state={supplies}>
           <Button
-            className="absolute bottom-0 w-full max-w-96 hover:bg-slate-300"
+            className="absolute bottom-0 w-full text-lg font-medium text-white bg-purple-600 max-w-96 hover:bg-purple-700"
             variant="secondary"
           >
             View Details

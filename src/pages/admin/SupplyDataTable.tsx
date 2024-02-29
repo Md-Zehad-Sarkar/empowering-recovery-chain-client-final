@@ -19,7 +19,9 @@ const SupplyDataTable = ({ supplies, handleDelete }: TSupplyDataTableProps) => {
     <TableRow key={supplies._id}>
       <TableCell className="font-medium">{supplies.title}</TableCell>
       <TableCell>{supplies.category}</TableCell>
-      <TableCell>{supplies.amount}</TableCell>
+      <TableCell>
+        <p>${supplies.amount}</p>
+      </TableCell>
       <TableCell className="text-right">
         <UpdateSupplyModal
           supplies={supplies}
@@ -30,7 +32,7 @@ const SupplyDataTable = ({ supplies, handleDelete }: TSupplyDataTableProps) => {
       <TableCell className="text-right">
         <Link to="/dashboard/create-supply">
           <Button
-            variant={"secondary"}
+            variant="secondary"
             className="hover:bg-gray-400 hover:text-white hover:font-bold"
           >
             <Plus />
@@ -40,7 +42,7 @@ const SupplyDataTable = ({ supplies, handleDelete }: TSupplyDataTableProps) => {
       <TableCell className="text-right">
         <Button
           onClick={() => handleDelete(supplies._id as string)}
-          variant={"secondary"}
+          variant="secondary"
           className=" hover:text-white hover:font-bold hover:bg-red-500"
         >
           <Trash />

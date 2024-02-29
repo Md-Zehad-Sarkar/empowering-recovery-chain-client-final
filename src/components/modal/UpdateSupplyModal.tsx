@@ -10,10 +10,16 @@ import { Textarea } from "../ui/textarea";
 import { Label } from "../ui/label";
 import InputField from "../form/InputField";
 import { useNavigate } from "react-router-dom";
-import { FieldValues, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useUpdateSupplyMutation } from "@/redux/features/supplies/suppliesApi";
 import { TSuppliesData } from "../home/Supplies";
 import axios from "axios";
+import {
+  SuppliesValidationSchema,
+  suppliesValidationSchema,
+} from "../validation/suppliesValidation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 
 type TUpdateModalProps = {
   setIsOpenModal: (isOpen: boolean) => void;
@@ -29,35 +35,46 @@ const UpdateSupplyModal = ({
   setIsOpenModal,
   supplies,
 }: TUpdateModalProps) => {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset } = useForm<SuppliesValidationSchema>({
+    resolver: zodResolver(suppliesValidationSchema),
+  });
   const navigate = useNavigate();
 
   const [updateSupply] = useUpdateSupplyMutation();
 
-  const onSubmit = async (data: FieldValues) => {
-    //image hosting
-    const formData = new FormData();
-    formData.append("image", data.image[0]);
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    try {
+      //image hosting
+      const formData = new FormData();
+      formData.append("image", data.image[0]);
 
-    // image hosting and get url
-    const response = await axios.post(api_url, formData, {
-      params: { key: image_hosting_api },
-    });
+      // image hosting and get url
+      const response = await axios.post(api_url, formData, {
+        params: { key: image_hosting_api },
+      });
 
-    // extract image url from response
-    const imageUrl = response.data?.data?.display_url;
+      // extract image url from response
+      const imageUrl = response.data?.data?.display_url;
 
-    const updateDoc = {
-      title: data.title,
-      category: data.category,
-      amount: data.amount,
-      image: imageUrl,
-      description: data.description,
-    };
+      const updateDoc = {
+        title: data.title,
+        category: data.category,
+        amount: data.amount,
+        image: imageUrl,
+        description: data.description,
+      };
 
-    reset();
-    updateSupply({ id: supplies._id, updateDoc });
-    navigate("/dashboard/supplies");
+      const res = await updateSupply({ id: supplies._id, updateDoc });
+      if (res?.data?.success) {
+        toast("supplies update successful");
+      } else {
+        toast("supplies update failed");
+      }
+      reset();
+      navigate("/dashboard/supplies");
+    } catch (error) {
+      toast("something went wrong");
+    }
   };
 
   return (
@@ -114,7 +131,11 @@ const UpdateSupplyModal = ({
             defaultValue={supplies.description}
           />
           <DialogClose>
-            <Button type="submit" className="mt-4" variant="secondary">
+            <Button
+              type="submit"
+              className="mt-4 text-lg font-medium text-white bg-purple-600 max-w-96 hover:bg-purple-700"
+              variant="secondary"
+            >
               Update Supply
             </Button>
           </DialogClose>

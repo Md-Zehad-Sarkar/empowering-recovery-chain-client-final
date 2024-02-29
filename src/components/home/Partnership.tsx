@@ -17,11 +17,11 @@ import donar15 from "@/assets/images/c15.png";
 
 const Partnership = () => {
   return (
-    <Container className="px-2 py-8 mt-24 bg-slate-100">
+    <Container className="px-2 py-8 mt-24 bg-purple-600">
       <h1 className="mb-20 text-4xl font-bold text-center">
         We are the Global Resilience Partnership
       </h1>
-      <p className="max-w-[1000px] mx-auto text-justify">
+      <p className="max-w-[1000px] mx-auto text-justify text-white">
         GRP is made up of organisations joining forces to work together towards
         a world where people and places persist, adapt and transform in the face
         of shocks, uncertainty and change. GRP believes that resilience

@@ -38,7 +38,11 @@ const Supplies = () => {
 
       <div className="flex items-center justify-center w-48 mx-auto mt-12">
         {!showAll && (
-          <Button onClick={handleMoreData} variant="secondary" className="w-48 text-white bg-red-400 hover:text-black">
+          <Button
+            onClick={handleMoreData}
+            variant="secondary"
+            className="w-48 text-lg font-medium text-white bg-purple-600 hover:text-white max-w-96 hover:bg-purple-700"
+          >
             View More
           </Button>
         )}

@@ -13,11 +13,20 @@ import { Textarea } from "../ui/textarea";
 import { donation } from "@/redux/features/supplies/suppliesSlice";
 import { Label } from "../ui/label";
 import { useAddDonationMutation } from "@/redux/features/donation/donation.api";
+import { useGetAllUsersQuery } from "@/redux/features/auth/authApi";
+import { toast } from "sonner";
 
 const DonateModal = () => {
   const { register, handleSubmit, reset } = useForm();
 
   const { user } = useAppSelector((state) => state.auth);
+
+  const { data: allUsers } = useGetAllUsersQuery(undefined);
+
+  const currentUserInfo = allUsers?.data?.find(
+    (auth) => auth.email === user?.email
+  );
+
   const [addDonation] = useAddDonationMutation();
 
   const navigate = useNavigate();
@@ -26,25 +35,36 @@ const DonateModal = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const donateData = {
-      userName: "user name",
+      userName: currentUserInfo?.name,
       email: user?.email,
       title: data.title,
       category: data.category,
       amount: Number(data.amount),
+      image: currentUserInfo?.image,
       description: data.description,
     };
 
-    await addDonation(donateData);
-
-    dispatch(donation(donateData));
+    const res = await addDonation(donateData);
     reset();
-    navigate("/dashboard");
+
+    if (res?.data?.success) {
+      toast("You have successfully donate");
+      dispatch(donation(donateData));
+      navigate("/dashboard");
+    } else {
+      toast("Donate cancel. please try again");
+    }
   };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="secondary">Donate now</Button>
+        <Button
+          className="text-lg font-medium text-white bg-purple-600 max-w-96 hover:bg-purple-700"
+          variant="secondary"
+        >
+          Donate now
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -75,7 +95,11 @@ const DonateModal = () => {
           <Textarea {...register("description")} />
 
           <DialogClose>
-            <Button type="submit" className="mt-4" variant="secondary">
+            <Button
+              type="submit"
+              className="w-full mt-4 text-lg font-medium text-white bg-purple-600 max-w-96 hover:bg-purple-700"
+              variant="secondary"
+            >
               Donate
             </Button>
           </DialogClose>

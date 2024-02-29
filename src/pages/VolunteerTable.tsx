@@ -1,6 +1,20 @@
 import { TableCell, TableRow } from "@/components/ui/table";
 
-const VolunteerTable = ({ volunteer }) => {
+type TVolunteer = {
+  _id?: string;
+  image?: string;
+  name?: string;
+  email?: string;
+  contactNo?: string;
+  address?: string;
+  time?: string;
+};
+
+type TVolunteerTableProps = {
+  volunteer: TVolunteer;
+};
+
+const VolunteerTable = ({ volunteer }: TVolunteerTableProps) => {
   return (
     <TableRow key={volunteer._id}>
       <TableCell className="font-medium">

@@ -1,12 +1,4 @@
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
   Table,
   TableBody,
   TableHead,
@@ -16,6 +8,16 @@ import {
 import { useGetAllVolunteersQuery } from "@/redux/features/auth/authApi";
 import { Loader } from "lucide-react";
 import VolunteerTable from "./VolunteerTable";
+
+type TVolunteer ={
+  _id?: string;
+  image?: string;
+  name?: string;
+  email?: string;
+  phoneNo?: string;
+  address?: string;
+  workTime?: string;
+}
 
 const AboutUs = () => {
   const { data: volunteers, isLoading } = useGetAllVolunteersQuery(undefined);
@@ -35,7 +37,7 @@ const AboutUs = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {volunteers?.data?.map((volunteer) => (
+        {volunteers?.data?.map((volunteer: TVolunteer) => (
           <VolunteerTable volunteer={volunteer} key={volunteer._id} />
         ))}
       </TableBody>

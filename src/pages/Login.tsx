@@ -28,6 +28,7 @@ const Login = () => {
       const result = await loginUser(userInfo).unwrap();
 
       const user = verifyToken(result?.token);
+
       const token = result?.token;
 
       dispatch(setUser({ user, token }));
@@ -60,7 +61,11 @@ const Login = () => {
           create one
         </Link>
       </p>
-      <Button type="submit" variant="secondary" className="mt-4 w-28">
+      <Button
+        type="submit"
+        variant="secondary"
+        className="mt-4 text-lg font-medium text-white bg-purple-600  w-28 max-w-96 hover:bg-purple-700"
+      >
         Login
       </Button>
     </form>

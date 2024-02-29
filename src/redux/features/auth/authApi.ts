@@ -2,6 +2,16 @@ import { baseApi } from "@/redux/api/baseApi";
 
 const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    getAllUsers: builder.query({
+      query: () => {
+        return {
+          url: "/api/v1/users",
+          method: "GET",
+        };
+      },
+
+      providesTags: ["users"],
+    }),
     createUser: builder.mutation({
       query: (userInfo) => {
         return {
@@ -10,7 +20,9 @@ const authApi = baseApi.injectEndpoints({
           body: userInfo,
         };
       },
+      invalidatesTags: ["users"],
     }),
+
     loginUser: builder.mutation({
       query: (userInfo) => {
         return {
@@ -45,6 +57,7 @@ const authApi = baseApi.injectEndpoints({
 });
 
 export const {
+  useGetAllUsersQuery,
   useCreateUserMutation,
   useLoginUserMutation,
   useCreateVolunteerMutation,

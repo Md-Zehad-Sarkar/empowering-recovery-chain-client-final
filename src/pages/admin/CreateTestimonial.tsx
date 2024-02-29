@@ -1,7 +1,6 @@
 import InputField from "@/components/form/InputField";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-
 import { Textarea } from "@/components/ui/textarea";
 import { useCreateReviewsMutation } from "@/redux/features/reviews/reviewsApi";
 import { useAppSelector } from "@/redux/hooks";
@@ -13,22 +12,24 @@ const CreateTestimonial = () => {
   const { user } = useAppSelector((state) => state.auth);
 
   const [createReviews] = useCreateReviewsMutation();
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const testimonialData = {
-      ...data,
+      review: data?.review,
       name: user?.userName,
       email: user?.email,
       image: "",
-      rating: Number(data.rating),
+      // rating: data.rating,
+      rating: Number(data?.rating),
       createdAt: new Date().toLocaleDateString(),
       createTime: new Date().toLocaleTimeString(),
       isDeleted: false,
     };
-    console.log(testimonialData);
+
     const res = await createReviews(testimonialData);
     reset();
     if (res?.data?.success) {
-      toast("You have successfully add a testimonial");
+      toast("You have successfully add a Review");
     } else {
       toast("Reviews failed to add");
     }
@@ -45,14 +46,20 @@ const CreateTestimonial = () => {
         placeholder="write your review....."
         className="mt-1"
       />
+
       <InputField
-        type="text"
+        type="number"
         name="rating"
         register={register("rating")}
         label="Rating"
         placeholder="give a rating maximum 5"
       />
-      <Button type="submit" variant={"ghost"} className="mt-2">
+
+      <Button
+        type="submit"
+        variant={"ghost"}
+        className="mt-2 text-lg font-medium text-white bg-purple-600 max-w-96 hover:text-white hover:bg-purple-700"
+      >
         Post Review
       </Button>
     </form>

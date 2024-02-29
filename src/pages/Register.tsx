@@ -2,13 +2,14 @@ import InputField from "@/components/form/InputField";
 import {
   UserValidationSchema,
   userRegistrationSchema,
-} from "@/components/form/RegisterFormValidator";
+} from "@/components/validation/RegisterFormValidator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { useCreateUserMutation } from "@/redux/features/auth/authApi";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "sonner";
 
 const image_hosting_api = import.meta.env.VITE_IMAGE_HOSTING_API;
 const api_url = "https://api.imgbb.com/1/upload";
@@ -17,6 +18,7 @@ const Register = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<UserValidationSchema>({
     resolver: zodResolver(userRegistrationSchema),
@@ -45,8 +47,15 @@ const Register = () => {
       image: imageUrl,
     };
 
-    createUser(createUserInfo);
-    navigate("/login");
+    const res = await createUser(createUserInfo);
+    reset();
+
+    if (res?.data?.success) {
+      navigate("/login");
+      toast("user registration successful");
+    } else {
+      toast("user registration failed");
+    }
   };
 
   return (
@@ -102,7 +111,11 @@ const Register = () => {
           login
         </Link>
       </p>
-      <Button type="submit" variant="secondary" className="mt-4 w-28">
+      <Button
+        type="submit"
+        variant="secondary"
+        className="mt-4 text-lg font-medium text-white bg-purple-600 w-28 max-w-96 hover:bg-purple-700"
+      >
         Register
       </Button>
     </form>

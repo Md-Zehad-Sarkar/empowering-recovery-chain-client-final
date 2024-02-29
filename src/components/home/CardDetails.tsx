@@ -17,29 +17,33 @@ const CardDetails = () => {
   const location = useLocation();
   const { title, image, category, amount, description } = location.state;
   return (
-    <Card className="mx-auto max-w-[1000px] mt-24">
+    <Card className="mx-auto max-w-[1000px] mt-24 bg-purple-100">
       <img src={image} alt="" className="w-full p-3 mx-auto rounded-lg" />
       <CardHeader>
         <CardTitle>
           <h2>Title: {title} </h2>
         </CardTitle>
         <CardDescription>
-          <p className="mt-4">Category: {category}</p>
-          <p className="mt-4">Description: {description}</p>
+          <p className="mt-4 text-black">Category: {category}</p>
+          <p className="mt-4 text-black">Description: {description}</p>
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <p>Amount: {amount} </p>
+        <p>Amount: ${amount} </p>
       </CardContent>
       <CardFooter className="flex end-0">
         {user && user ? (
           <DonateModal />
         ) : (
           <Link to="/login">
-            <Button variant="secondary">Donate Now</Button>
+            <Button
+              className="absolute bottom-0 w-full text-lg font-medium text-white bg-purple-600 max-w-96 hover:bg-purple-700"
+              variant="secondary"
+            >
+              Donate Now
+            </Button>
           </Link>
         )}
-        {/* <DonateModal /> */}
       </CardFooter>
     </Card>
   );

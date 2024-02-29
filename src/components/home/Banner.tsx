@@ -8,9 +8,9 @@ const visibleMask = `repeating-linear-gradient(to right, rgba(0,0,0,0) 0px, rgba
 
 const Banner = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-   const [isInView, setIsInView] = useState(false);
+  const [isInView, setIsInView] = useState(false);
   return (
-    <div className="mt-24">
+    <div className="mt-24 shadow-sm">
       <motion.div
         className="w-full lg:max-w-[1000px] mx-auto mb-4 md:max-w-[700px]"
         initial={false}
@@ -30,7 +30,7 @@ const Banner = () => {
           className="w-full lg:max-w-[1000px] mx-auto mb-4 md:max-w-[700px]"
         />
       </motion.div>
-      <div className="p-4 w-full  lg:max-w-[1000px] mx-auto text-justify md:max-w-[760px]">
+      <div className="pt-2 w-full  lg:max-w-[1000px] mx-auto text-justify md:max-w-[760px]">
         <p className="mb-8 font-medium">
           Welcome to our 'Empowering Recovery Chain' Platform! Our mission is to
           ensure effective and efficient health and medical supply chain

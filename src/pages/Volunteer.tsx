@@ -29,7 +29,7 @@ const Volunteer = () => {
       ...data,
       image: imageUrl,
     };
-    console.log(volunteerData);
+
     const res = await addVolunteer(volunteerData);
     if (res?.data?.success) {
       toast("Volunteer sign up successful");
@@ -77,7 +77,12 @@ const Volunteer = () => {
         label="Working Hour"
         placeholder="give your working time maximum 8 hours"
       />
-      <Button type="submit">Submit</Button>
+      <Button
+        type="submit"
+        className="text-lg font-medium text-white bg-purple-600 max-w-96 hover:bg-purple-700"
+      >
+        Submit
+      </Button>
     </form>
   );
 };

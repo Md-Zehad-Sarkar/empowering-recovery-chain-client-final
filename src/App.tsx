@@ -6,7 +6,7 @@ function App() {
   const { themeMode } = useAppSelector((state) => state.theme);
 
   return (
-    <Container className={themeMode === true ? "bg-black" : "bg-white"}>
+    <Container className={themeMode === true ? "bg-gray-800 text-white" : "bg-white text-black"}>
       <MainLayout />
     </Container>
   );

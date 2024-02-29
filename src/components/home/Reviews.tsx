@@ -27,7 +27,7 @@ const Reviews = () => {
   const reviews = data?.data?.slice(0, 6);
 
   return (
-    <Container className="p-3 mt-24 rounded-sm bg-slate-100">
+    <Container className="p-3 mt-24 text-black rounded-sm bg-violet-100">
       <h1 className="mb-16 text-4xl font-bold text-center">
         Whats our client say's
       </h1>

@@ -3,9 +3,9 @@ import aboutImage from "@/assets/images/b.jpeg";
 
 const Summery = () => {
   return (
-    <Container className="mt-24">
+    <Container className="py-4 mt-24 bg-violet-500">
       <h1 className="mb-24 text-4xl font-bold text-center">Who we are?</h1>
-      <div className="grid gap-5 lg:grid-cols-12">
+      <div className="grid gap-5 text-white lg:grid-cols-12">
         <div className="lg:col-span-5">
           <img src={aboutImage} alt="" className="w-full" />
         </div>
