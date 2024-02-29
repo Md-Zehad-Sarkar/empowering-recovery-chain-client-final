@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { useCreateVolunteerMutation } from "@/redux/features/auth/authApi";
 import axios from "axios";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { toast } from "sonner";
 
 const image_hosting_api = import.meta.env.VITE_IMAGE_HOSTING_API;
 const api_url = "https://api.imgbb.com/1/upload";
@@ -30,12 +29,8 @@ const Volunteer = () => {
       image: imageUrl,
     };
 
-    const res = await addVolunteer(volunteerData);
-    if (res?.data?.success) {
-      toast("Volunteer sign up successful");
-    } else {
-      toast("Volunteer sign up failed");
-    }
+    await addVolunteer(volunteerData);
+
     reset();
   };
   return (
