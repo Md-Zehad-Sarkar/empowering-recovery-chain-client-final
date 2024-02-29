@@ -2,9 +2,9 @@
 
 - ui live link :https://empowering-recovery-chain.netlify.app
 
-- client repo link :https://github.com/Porgramming-Hero-web-course/l2-b2-assignment-6-fronten-Md-Zehad-Sarkar.git
+- client repo link :https://github.com/Md-Zehad-Sarkar/empowering-recovery-chain-client-final.git
 
-- server repo link : https://github.com/Porgramming-Hero-web-course/l2-b2-assignment-6-backend-Md-Zehad-Sarkar.git
+- server repo link : https://github.com/Md-Zehad-Sarkar/empowering-recovery-chain-server-final.git
 
 ## technologies
 
