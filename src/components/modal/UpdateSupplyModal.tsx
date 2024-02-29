@@ -64,12 +64,8 @@ const UpdateSupplyModal = ({
         description: data.description,
       };
 
-      const res = await updateSupply({ id: supplies._id, updateDoc });
-      if (res?.data?.success) {
-        toast("supplies update successful");
-      } else {
-        toast("supplies update failed");
-      }
+      await updateSupply({ id: supplies._id, updateDoc });
+
       reset();
       navigate("/dashboard/supplies");
     } catch (error) {

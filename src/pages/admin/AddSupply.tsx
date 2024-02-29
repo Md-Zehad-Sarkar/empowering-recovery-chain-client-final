@@ -49,16 +49,13 @@ const AddSupply = () => {
         image: imageUrl,
         description: data.description,
       };
-      // const validateData = await suppliesValidationSchema.safeParseAsync(
-      //   suppliesData
-      // );
 
       createSupply(suppliesData);
-      // createSupply(validateData);
+
       reset();
       navigate("/dashboard/supplies");
     } catch (error) {
-      console.log("error", error);
+      // console.log("error", error);
     }
   };
   return (
@@ -105,7 +102,7 @@ const AddSupply = () => {
         placeholder="upload a image"
       />
       {errors.image && (
-        <span className="text-red-400">{errors.image.message}</span>
+        <span className="text-red-400">Select a image file max 10 mb</span>
       )}
       <Label className="mb-2">Description</Label>
       <Textarea

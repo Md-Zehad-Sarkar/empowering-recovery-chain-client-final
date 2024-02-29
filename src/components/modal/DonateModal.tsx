@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -14,17 +15,16 @@ import { donation } from "@/redux/features/supplies/suppliesSlice";
 import { Label } from "../ui/label";
 import { useAddDonationMutation } from "@/redux/features/donation/donation.api";
 import { useGetAllUsersQuery } from "@/redux/features/auth/authApi";
-import { toast } from "sonner";
 
 const DonateModal = () => {
   const { register, handleSubmit, reset } = useForm();
 
   const { user } = useAppSelector((state) => state.auth);
 
-  const { data: allUsers } = useGetAllUsersQuery(undefined);
+  const { data: allUsers } = useGetAllUsersQuery("");
 
   const currentUserInfo = allUsers?.data?.find(
-    (auth) => auth.email === user?.email
+    (auth: any) => auth.email === user?.email
   );
 
   const [addDonation] = useAddDonationMutation();
@@ -39,21 +39,16 @@ const DonateModal = () => {
       email: user?.email,
       title: data.title,
       category: data.category,
-      amount: Number(data.amount),
+      amount: data.amount,
       image: currentUserInfo?.image,
       description: data.description,
     };
 
-    const res = await addDonation(donateData);
+    await addDonation(donateData);
     reset();
 
-    if (res?.data?.success) {
-      toast("You have successfully donate");
-      dispatch(donation(donateData));
-      navigate("/dashboard");
-    } else {
-      toast("Donate cancel. please try again");
-    }
+    dispatch(donation(donateData));
+    navigate("/dashboard");
   };
 
   return (

@@ -5,7 +5,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { useCreateReviewsMutation } from "@/redux/features/reviews/reviewsApi";
 import { useAppSelector } from "@/redux/hooks";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { toast } from "sonner";
 
 const CreateTestimonial = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -26,13 +25,8 @@ const CreateTestimonial = () => {
       isDeleted: false,
     };
 
-    const res = await createReviews(testimonialData);
+    await createReviews(testimonialData);
     reset();
-    if (res?.data?.success) {
-      toast("You have successfully add a Review");
-    } else {
-      toast("Reviews failed to add");
-    }
   };
   return (
     <form

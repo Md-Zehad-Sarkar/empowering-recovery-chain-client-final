@@ -9,7 +9,6 @@ import { useCreateUserMutation } from "@/redux/features/auth/authApi";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { toast } from "sonner";
 
 const image_hosting_api = import.meta.env.VITE_IMAGE_HOSTING_API;
 const api_url = "https://api.imgbb.com/1/upload";
@@ -47,15 +46,9 @@ const Register = () => {
       image: imageUrl,
     };
 
-    const res = await createUser(createUserInfo);
+    await createUser(createUserInfo);
     reset();
-
-    if (res?.data?.success) {
-      navigate("/login");
-      toast("user registration successful");
-    } else {
-      toast("user registration failed");
-    }
+    navigate("/login");
   };
 
   return (
