@@ -35,7 +35,7 @@ const Login = () => {
       const token = result?.token;
 
       dispatch(setUser({ user, token }));
-      toast.success("Login successful. Please try again.", {
+      toast.success("Login successful.", {
         id: toastId,
         duration: 2000,
       });
