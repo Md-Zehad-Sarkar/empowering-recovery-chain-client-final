@@ -54,7 +54,7 @@ const Volunteer = () => {
         toast("Volunteer registration failed");
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
   return (

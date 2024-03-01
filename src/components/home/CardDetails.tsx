@@ -37,7 +37,7 @@ const CardDetails = () => {
         ) : (
           <Link to="/login">
             <Button
-              className="absolute bottom-0 w-full text-lg font-medium text-white bg-purple-600 max-w-96 hover:bg-purple-700"
+              className="w-full text-lg font-medium text-white bg-purple-600  max-w-96 hover:bg-purple-700"
               variant="secondary"
             >
               Donate Now
