@@ -7,7 +7,7 @@ import { useCreateReviewsMutation } from "@/redux/features/reviews/reviewsApi";
 import { useAppSelector } from "@/redux/hooks";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
-type TAllUser = {
+export type TAllUser = {
   _id: string;
   email: string;
   image: string;

@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { useGetAllUsersQuery } from "@/redux/features/auth/authApi";
 import {
   useAddGratitudeWallMutation,
   useGetAllGratitudeWallQuery,
@@ -7,10 +8,12 @@ import {
 import { useAppSelector } from "@/redux/hooks";
 import { Loader } from "lucide-react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { TAllUser } from "./admin/CreateTestimonial";
 
 type TComment = {
   _id?: string;
   userName?: string;
+  image?: string;
   comment?: string;
   createTime?: string;
 };
@@ -19,6 +22,12 @@ const GratitudeWall = () => {
   const { register, handleSubmit, reset } = useForm();
 
   const { user } = useAppSelector((state) => state.auth);
+
+  const { data: allUsers } = useGetAllUsersQuery(undefined);
+
+  const currentUser = allUsers?.data.find(
+    (singleUser: TAllUser) => singleUser.email === user?.email
+  );
 
   const { data: gratitudes, isLoading } = useGetAllGratitudeWallQuery("");
 
@@ -31,8 +40,9 @@ const GratitudeWall = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const gratitudeData = {
       ...data,
-      userName: "username",
+      userName: currentUser?.name,
       email: user?.email,
+      image: currentUser?.image,
       createdAt: new Date().toLocaleDateString(),
       createTime: new Date().toLocaleTimeString(),
       isDeleted: false,
@@ -67,7 +77,14 @@ const GratitudeWall = () => {
             className="p-2 mb-2 text-black shadow-md bg-purple-50"
             key={comment._id}
           >
-            <h2 className="text-xl font-medium">{comment?.userName}</h2>
+            <div className="flex items-center gap-3">
+              <img
+                src={comment?.image}
+                alt=""
+                className="w-12 h-12 rounded-full"
+              />
+              <h2 className="text-xl font-medium">{comment?.userName}</h2>
+            </div>
             <p>{comment?.comment}</p>
             <div>
               <p className="mt-2 font-medium">{comment?.createTime}</p>
