@@ -9,6 +9,7 @@ import { useAppSelector } from "@/redux/hooks";
 import { Loader } from "lucide-react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { TAllUser } from "./admin/CreateTestimonial";
+import { toast } from "sonner";
 
 type TComment = {
   _id?: string;
@@ -48,8 +49,12 @@ const GratitudeWall = () => {
       isDeleted: false,
     };
 
-    await addGratitude(gratitudeData);
+    const res = await addGratitude(gratitudeData);
     reset();
+    
+    if ("data" in res && res?.data?.success) {
+      toast("Your wall posted successful");
+    }
   };
 
   return (
