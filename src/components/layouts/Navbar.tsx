@@ -47,15 +47,7 @@ const Navbar = () => {
               Supplies
             </NavLink>
           </motion.li>
-          <motion.li whileTap={{ scale: 0.9 }}>
-            <NavLink
-              to="/dashboard"
-              className="px-1 py-1 rounded-md"
-              onClick={handleLinkClick}
-            >
-              Dashboard
-            </NavLink>
-          </motion.li>
+
           <motion.li whileTap={{ scale: 0.9 }}>
             <NavLink
               to="/volunteer"
@@ -65,15 +57,7 @@ const Navbar = () => {
               Volunteer
             </NavLink>
           </motion.li>
-          <motion.li whileTap={{ scale: 0.9 }}>
-            <NavLink
-              to="/about-us"
-              className="px-1 py-1 rounded-md"
-              onClick={handleLinkClick}
-            >
-              About-Us
-            </NavLink>
-          </motion.li>
+
           <motion.li whileTap={{ scale: 0.9 }}>
             <NavLink
               to="/leaderboard"
@@ -90,6 +74,24 @@ const Navbar = () => {
               onClick={handleLinkClick}
             >
               Community
+            </NavLink>
+          </motion.li>
+          <motion.li whileTap={{ scale: 0.9 }}>
+            <NavLink
+              to="/dashboard"
+              className="px-1 py-1 rounded-md"
+              onClick={handleLinkClick}
+            >
+              Dashboard
+            </NavLink>
+          </motion.li>
+          <motion.li whileTap={{ scale: 0.9 }}>
+            <NavLink
+              to="/about-us"
+              className="px-1 py-1 rounded-md"
+              onClick={handleLinkClick}
+            >
+              About-Us
             </NavLink>
           </motion.li>
           <motion.li whileTap={{ scale: 0.9 }}>

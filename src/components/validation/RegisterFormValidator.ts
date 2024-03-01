@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const MAX_FILE_SIZE = 1024 * 1024 * 5;
+const MAX_FILE_SIZE = 1024 * 1024 * 10;
 const ACCEPTED_IMAGE_MIME_TYPES = [
   "image/jpeg",
   "image/jpg",
@@ -9,9 +9,7 @@ const ACCEPTED_IMAGE_MIME_TYPES = [
 ];
 
 export const userRegistrationSchema = z.object({
-  userName: z
-    .string()
-    .min(4, { message: "username must be at least 4 character" }),
+  userName: z.string().nonempty({ message: "User name is required" }),
   email: z.string().email({ message: "type valid email" }),
   password: z
     .string()

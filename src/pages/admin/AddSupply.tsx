@@ -11,6 +11,7 @@ import {
   suppliesValidationSchema,
 } from "@/components/validation/suppliesValidation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 
 const image_hosting_api = import.meta.env.VITE_IMAGE_HOSTING_API;
 const api_url = "https://api.imgbb.com/1/upload";
@@ -33,7 +34,9 @@ const AddSupply = () => {
     try {
       //image hosting
       const formData = new FormData();
+
       formData.append("image", data.image[0]);
+
       // image hosting and get url
       const response = await axios.post(api_url, formData, {
         params: { key: image_hosting_api },
@@ -50,14 +53,19 @@ const AddSupply = () => {
         description: data.description,
       };
 
-      createSupply(suppliesData);
+      const res = await createSupply(suppliesData);
 
       reset();
-      navigate("/dashboard/supplies");
+
+      if ("data" in res && res.data?.success) {
+        toast("supply created successful");
+        navigate("/dashboard/supplies");
+      }
     } catch (error) {
       // console.log("error", error);
     }
   };
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}

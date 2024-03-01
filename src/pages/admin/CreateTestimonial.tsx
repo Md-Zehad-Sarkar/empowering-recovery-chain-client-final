@@ -2,22 +2,40 @@ import InputField from "@/components/form/InputField";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { useGetAllUsersQuery } from "@/redux/features/auth/authApi";
 import { useCreateReviewsMutation } from "@/redux/features/reviews/reviewsApi";
 import { useAppSelector } from "@/redux/hooks";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
+type TAllUser = {
+  _id: string;
+  email: string;
+  image: string;
+};
 
 const CreateTestimonial = () => {
   const { register, handleSubmit, reset } = useForm();
+
   const { user } = useAppSelector((state) => state.auth);
 
+  const { data: allUsers, isLoading } = useGetAllUsersQuery(undefined);
+
   const [createReviews] = useCreateReviewsMutation();
+
+  if (isLoading) {
+    return <p className="w-24 mx-auto">Loading...</p>;
+  }
+
+  const currentUser = allUsers?.data?.find(
+    (singleUser: TAllUser) => singleUser.email === user?.email
+  );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const testimonialData = {
       review: data?.review,
       name: user?.userName,
       email: user?.email,
-      image: "",
+      image: currentUser?.image,
       // rating: data.rating,
       rating: Number(data?.rating),
       createdAt: new Date().toLocaleDateString(),
@@ -25,9 +43,16 @@ const CreateTestimonial = () => {
       isDeleted: false,
     };
 
-    await createReviews(testimonialData);
+    const res = await createReviews(testimonialData);
     reset();
+
+    if ("data" in res && res.data.success) {
+      toast("Your review success");
+    } else {
+      toast("Review failed");
+    }
   };
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}

@@ -12,6 +12,7 @@ export const suppliesValidationSchema = z.object({
   title: z.string().nonempty({ message: "this field is required" }),
   category: z.string().nonempty({ message: "This field is required" }),
   amount: z.string().nonempty({ message: "This field is required" }),
+  // amount: z.number().int(),
   image: z
     .any()
     .refine((files) => {

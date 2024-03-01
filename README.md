@@ -1,8 +1,8 @@
 # Empowering Recovery Chain
 
-- ui live link :https://empowering-recovery-chain.netlify.app
+- ui live link : https://empowering-recovery-chain-client-site.netlify.app/
 
-- client repo link :https://github.com/Md-Zehad-Sarkar/empowering-recovery-chain-client-final.git
+- client repo link : https://github.com/Md-Zehad-Sarkar/empowering-recovery-chain-client-final.git
 
 - server repo link : https://github.com/Md-Zehad-Sarkar/empowering-recovery-chain-server-final.git
 

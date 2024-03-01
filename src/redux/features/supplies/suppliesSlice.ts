@@ -3,7 +3,7 @@ type TSupplies = {
   email?: string;
   title: string;
   category: string;
-  amount: string;
+  amount: number|string;
   description: string;
 };
 type TSuppliesState = {

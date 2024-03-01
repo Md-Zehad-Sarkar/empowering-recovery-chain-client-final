@@ -64,10 +64,16 @@ const UpdateSupplyModal = ({
         description: data.description,
       };
 
-      await updateSupply({ id: supplies._id, updateDoc });
+      const res = await updateSupply({ id: supplies._id, updateDoc });
 
       reset();
-      navigate("/dashboard/supplies");
+
+      if ("data" in res && res?.data?.success) {
+        toast("Supply data updated successful ");
+        navigate("/dashboard/supplies");
+      } else {
+        toast("Supply data updated failed ");
+      }
     } catch (error) {
       toast("something went wrong");
     }
@@ -120,11 +126,12 @@ const UpdateSupplyModal = ({
             register={register("image")}
             placeholder="upload a image"
           />
-          <Label className="mb-2">Description</Label>
+          <Label>Description</Label>
           <Textarea
             {...register("description")}
             placeholder="write a description"
             defaultValue={supplies.description}
+            className="mt-2"
           />
           <DialogClose>
             <Button

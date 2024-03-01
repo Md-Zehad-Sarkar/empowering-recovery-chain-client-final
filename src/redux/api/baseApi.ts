@@ -12,8 +12,8 @@ import { logoutUser, setUser } from "../features/auth/authSlice";
 import { toast } from "sonner";
 
 const baseQuery = fetchBaseQuery({
-  // baseUrl: "http://localhost:5000",
-  baseUrl: "https://empowering-recovery-chain-server.vercel.app",
+  baseUrl: "http://localhost:5000",
+  // baseUrl: "https://empowering-recovery-chain-server.vercel.app",
 
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
@@ -36,10 +36,12 @@ const baseQueryRefreshToken: BaseQueryFn<
   if (result?.error?.status === 400) {
     return toast("this user already exist");
   }
+ 
 
   if (result?.error?.status === 401) {
     const res = await fetch(
-      "https://empowering-recovery-chain-server.vercel.app/api/v1/login",
+      // "https://empowering-recovery-chain-server.vercel.app/api/v1/login",
+      "http://5000/api/v1/login",
       {
         method: "POST",
         credentials: "include",

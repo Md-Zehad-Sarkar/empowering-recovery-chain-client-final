@@ -8,7 +8,7 @@ export type TSuppliesData = {
   _id?: string;
   title: string;
   category: string;
-  amount: string;
+  amount: number;
   image?: string;
   description?: string;
 };

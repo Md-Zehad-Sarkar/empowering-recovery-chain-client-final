@@ -6,6 +6,7 @@ import { useAppDispatch } from "@/redux/hooks";
 import { verifyToken } from "@/utls/utls";
 import { FieldValues, useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
@@ -20,6 +21,8 @@ const Login = () => {
 
   const onSubmit = async (data: FieldValues) => {
     try {
+      const toastId = toast("Logging in");
+
       const userInfo = {
         email: data.email,
         password: data.password,
@@ -32,9 +35,13 @@ const Login = () => {
       const token = result?.token;
 
       dispatch(setUser({ user, token }));
+      toast.success("Login successful. Please try again.", {
+        id: toastId,
+        duration: 2000,
+      });
       navigate(from, { replace: true });
     } catch (error) {
-      // console.log(error, "error");
+      toast.error("Login failed. Please try again.", { duration: 2000 });
     }
   };
   return (
@@ -64,7 +71,7 @@ const Login = () => {
       <Button
         type="submit"
         variant="secondary"
-        className="mt-4 text-lg font-medium text-white bg-purple-600  w-28 max-w-96 hover:bg-purple-700"
+        className="mt-4 text-lg font-medium text-white bg-purple-600 w-28 max-w-96 hover:bg-purple-700"
       >
         Login
       </Button>

@@ -15,6 +15,7 @@ import { donation } from "@/redux/features/supplies/suppliesSlice";
 import { Label } from "../ui/label";
 import { useAddDonationMutation } from "@/redux/features/donation/donation.api";
 import { useGetAllUsersQuery } from "@/redux/features/auth/authApi";
+import { toast } from "sonner";
 
 const DonateModal = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -39,16 +40,21 @@ const DonateModal = () => {
       email: user?.email,
       title: data.title,
       category: data.category,
-      amount: data.amount,
+      amount: Number(data.amount),
       image: currentUserInfo?.image,
       description: data.description,
     };
 
-    await addDonation(donateData);
+    const res = await addDonation(donateData);
     reset();
 
-    dispatch(donation(donateData));
-    navigate("/dashboard");
+    if ("data" in res && res?.data?.success) {
+      toast("You have successfully donated");
+      dispatch(donation(donateData));
+      navigate("/dashboard");
+    } else {
+      toast("Donated failed. Please try again.");
+    }
   };
 
   return (
